@@ -1,6 +1,9 @@
 body {
     background-color: black;
 }
+div.ui{
+    width:30%;
+}
 button {
     background-color: #cccccc;
     color: darkslategrey;
@@ -25,12 +28,18 @@ button.divider {
     margin:0;
 
 }
-#map{
-    float: left;
+img{
+    position: relative;
+    left: -250px;
+    top:-50px;
 }
 h1{
     color:white;
     font-size: 150%;
+}
+h2{
+    color:white;
+    font-size: 300%;
 }
 hr{
     border-color:white;
