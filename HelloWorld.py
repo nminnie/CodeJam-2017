@@ -33,7 +33,7 @@ def main():
             x.season = 0
             starttime = row['starttime']
             sDate, sTime = starttime.split(" ")
-            sHour, sMin, sSec = sTime.split(":")
+            sHour, sMin = sTime.split(":")
             sHour = int(sHour)
             # 0 = morning, 1 = afternoon, 2 = night
             if (4 <= sHour and sHour < 12):
@@ -42,7 +42,7 @@ def main():
                 x.time = 1
             else:
                 x.time = 2
-            sMonth, sDay, sYear = sDate.split("-")
+            sMonth, sDay, sYear = sDate.split("/")
             sDay = int(sDay)
             # 0 = weekday, 1 = weekend
             if (sDay % 7 == 4 or sDay % 7 == 5):
@@ -71,7 +71,7 @@ def main():
             x.season = 1
             starttime = row['starttime']
             sDate, sTime = starttime.split(" ")
-            sHour, sMin, sSec = sTime.split(":")
+            sHour, sMin = sTime.split(":")
             sHour = int(sHour)
             # 0 = morning, 1 = afternoon, 2 = night
             if (4 <= sHour and sHour < 12):
@@ -80,7 +80,7 @@ def main():
                 x.time = 1
             else:
                 x.time = 2
-            sMonth, sDay, sYear = sDate.split("-")
+            sMonth, sDay, sYear = sDate.split("/")
             sDay = int(sDay)
             # 0 = weekday, 1 = weekend
             if (sDay % 7 == 5 or sDay % 7 == 6):
@@ -241,11 +241,63 @@ def main():
     # doesn't include null values
     xSize = 10
     ySize = 10
+
+    dict = {'rides': "ALLDAY_ALLWK_ALLYR",
+            'allmorning': "day_ALLWK_ALLYR",
+            'allafternoon': "eve_ALLWK_ALLYR",
+            'allnight': "night_ALLWK_ALLYR",
+
+            'weekdayallday': "ALLDAY_WKDAY_ALLYR",
+            'weekdaymorning': "day_WKDAY_ALLYR",
+            'weekdayafternoon': "eve_WKDAY_ALLYR",
+            'weekdaynight': "night_WKDAY_ALLYR",
+
+            'weekendallday': "ALLDAY_WKEND_ALLYR",
+            'weekendmorning': "day_WKEND_ALLYR",
+            'weekendafternoon': "eve_WKEND_ALLYR",
+            'weekendnight': "night_WKEND_ALLYR",
+
+            'winter_AllWeek_allday': "ALLDAY_ALLWK_WINTER",
+            'winter_AllWeek_morning': "day_ALLWK_WINTER",
+            'winter_AllWeek_afternoon': "eve_ALLWK_WINTER",
+            'winter_AllWeek_night': "night_ALLWK_WINTER",
+
+            'winter_Weekday_allday': "ALLDAY_WKDAY_WINTER",
+            'winter_Weekday_morning': "day_WKDAY_WINTER",
+            'winter_Weekday_afternoon': "eve_WKDAY_WINTER",
+            'winter_Weekday_night': "night_WKDAY_WINTER",
+
+            'winter_Weekend_allday': "ALLDAY_WKEND_WINTER",
+            'winter_Weekend_morning': "day_WKEND_WINTER",
+            'winter_Weekend_afternoon': "eve_WKEND_WINTER",
+            'winter_Weekend_night': "night_WKEND_WINTER",
+
+            'summer_AllWeek_allday': "ALLDAY_ALLWK_SUMMER",
+            'summer_AllWeek_morning': "day_ALLWK_SUMMER",
+            'summer_AllWeek_afternoon': "eve_ALLWK_SUMMER",
+            'summer_AllWeek_night': "night_ALLWK_SUMMER",
+
+            'summer_Weekday_allday': "ALLDAY_WKDAY_SUMMER",
+            'summer_Weekday_morning': "day_WKDAY_SUMMER",
+            'summer_Weekday_afternoon': "eve_WKDAY_SUMMER",
+            'summer_Weekday_night': "night_WKDAY_SUMMER",
+
+            'summer_Weekend_allday': "ALLDAY_WKEND_SUMMER",
+            'summer_Weekend_morning': "day_WKEND_SUMMER",
+            'summer_Weekend_afternoon': "eve_WKEND_SUMMER",
+            'summer_Weekend_night': "night_WKEND_SUMMER",
+            }
+
+    listMake = allmorning
+
+    filename = dict['allmorning'] + ".png"
+
     x = []
     y = []
-    for i in range(0, len(allmorning)):  # Adds new elements
-        x.append(allmorning[i].startLat)
-        y.append(allmorning[i].startLong)
+
+    for i in range(0, len(listMake)):  # Adds new elements
+        x.append(listMake[i].startLat)
+        y.append(listMake[i].startLong)
 
     # good range: [40.4, 41.0], [-74.4, -73.6]
     heatmap, xedges, yedges = np.histogram2d(x, y, bins=(xSize, ySize), range=[[40.63, 40.81], [-74.05, -73.9]])
@@ -253,7 +305,9 @@ def main():
     for i in range(0, xSize):
         for j in range(0, ySize):
             regionDensity.append(heatmap[i, j])
+         #   print(regionDensity)
             sum += heatmap[i, j]
+            # print (xSize)
     # Turn regionDensity into a proportion
     for i in range(0, xSize):
         for j in range(0, ySize):
@@ -287,6 +341,7 @@ def main():
     bikeStopsY = []
     for i in range(0, int(xSize * ySize)):
         nodeLoc[i].sort()
+      #  print(numInRegion)
         for j in range(0, int(numInRegion[i])):
             tempLocValues.append(nodeLoc[i].pop())
             # Go through heatmap to find the positions where this occurs
@@ -295,6 +350,7 @@ def main():
                     if (heatmapRes[k][l] == tempLocValues[j]):
                         bikeStopsX.append(k / 550 + 40.625)
                         bikeStopsY.append(l / 550 - 74.06)
+                        # print(bikeStopsY.append(l))
                         # bikeStops[len(bikeStops)] = [heatmapRes.index(tempLocValues[j])]
         tempLocValues = []
     latIn = 0
@@ -320,7 +376,7 @@ def main():
         bikeStopDtn[minPos]+= 1
         distanceArr = []
 
-    print(bikeStopDtn)
+    #print(bikeStopDtn)
     # plt.scatter(bikeStopsY, bikeStopsX, color = 'red')
     # plt.show
 
@@ -346,15 +402,18 @@ def main():
     extent = [yedges[0], yedges[-1], xedges[0], xedges[-1]]
 
  #   print(bikeStopDtn)
-
+    for i in range (0, len(bikeStopDtn)):
+        bikeStopDtn[i] = math.sqrt(bikeStopDtn[i])
     plt.clf()
     plt.imshow(heatmap, extent=extent, cmap="gray", origin='lower', vmax=1)
-    plt.scatter(bikeStopsY, bikeStopsX, s = bikeStopDtn, c = bikeStopDtn, cmap = "Pastel1", marker = 'o')
+    plt.scatter(bikeStopsY, bikeStopsX, s = bikeStopDtn, c = bikeStopDtn, cmap = "Pastel1", marker = 'o', edgecolors='black', linewidths=1)
+    plt.savefig(filename, format='png', dpi = 1200, transparent = True)
     plt.show()
 
 
 def distance(x, y, refX, refY):
     value = math.sqrt((x - refX) ** 2 + (y - refY) ** 2)
+  #  print (value)
     return value
 
 
