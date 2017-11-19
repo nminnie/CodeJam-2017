@@ -243,11 +243,9 @@ def main():
     ySize = 10
     x = []
     y = []
-  #  print (allmorning)
     for i in range(0, len(allmorning)):  # Adds new elements
         x.append(allmorning[i].startLat)
         y.append(allmorning[i].startLong)
-   # print(x, y)
 
     # good range: [40.4, 41.0], [-74.4, -73.6]
     heatmap, xedges, yedges = np.histogram2d(x, y, bins=(xSize, ySize), range=[[40.63, 40.81], [-74.05, -73.9]])
@@ -255,9 +253,7 @@ def main():
     for i in range(0, xSize):
         for j in range(0, ySize):
             regionDensity.append(heatmap[i, j])
-         #   print(regionDensity)
             sum += heatmap[i, j]
-            # print (xSize)
     # Turn regionDensity into a proportion
     for i in range(0, xSize):
         for j in range(0, ySize):
@@ -291,7 +287,6 @@ def main():
     bikeStopsY = []
     for i in range(0, int(xSize * ySize)):
         nodeLoc[i].sort()
-      #  print(numInRegion)
         for j in range(0, int(numInRegion[i])):
             tempLocValues.append(nodeLoc[i].pop())
             # Go through heatmap to find the positions where this occurs
@@ -300,7 +295,6 @@ def main():
                     if (heatmapRes[k][l] == tempLocValues[j]):
                         bikeStopsX.append(k / 550 + 40.625)
                         bikeStopsY.append(l / 550 - 74.06)
-                        # print(bikeStopsY.append(l))
                         # bikeStops[len(bikeStops)] = [heatmapRes.index(tempLocValues[j])]
         tempLocValues = []
     latIn = 0
@@ -361,7 +355,6 @@ def main():
 
 def distance(x, y, refX, refY):
     value = math.sqrt((x - refX) ** 2 + (y - refY) ** 2)
-  #  print (value)
     return value
 
 
