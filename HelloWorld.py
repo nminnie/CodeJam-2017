@@ -220,25 +220,7 @@ def main():
     regionDensity = []
     numInRegion = []
     bikeStops = []
-    # ifile = open('NYC-vehicle-collisions.csv',"r")
-    # ifile = open('2014-04-CitiBikeTripData.csv',"r")
-    #    reader = csv.reader(ifile, delimiter=",")
-    #   rownum=0
-    #  a=[]
-    # for row in reader:
-    #    a.append(row)
-    #   rownum+=1
-    #  ifile.close()
-    #  print(a[2][2])
-    #  x=[]
-    #  y=[]
-    #  for z in range(1,len(a)):
-    #      if a[z][5] != "" and a[z][6] != "":
-    #          x.append(float(a[z][5]))
-    #          y.append(float(a[z][6]))
-    # x is list of longitude
-    # y is list of latitude
-    # doesn't include null values
+
     xSize = 10
     ySize = 10
 
@@ -341,7 +323,6 @@ def main():
     bikeStopsY = []
     for i in range(0, int(xSize * ySize)):
         nodeLoc[i].sort()
-      #  print(numInRegion)
         for j in range(0, int(numInRegion[i])):
             tempLocValues.append(nodeLoc[i].pop())
             # Go through heatmap to find the positions where this occurs
@@ -357,14 +338,12 @@ def main():
     longIn = 0
     distanceArr = []
     bikeStopDtn = []
-    # print(len(bikeStopsX))
     for i in range(0, len(bikeStopsX)):
         bikeStopDtn.append(0)
     refArray = []  # reference array that contains [lat, long]
     refArrayNode = []  # corresponds with refArray. Shows node
     for i in range(0, len(bikeStopsX)):
         refArray = []
-   # print(len(x))
     indexVal = 0
 
     for j in range(0, len(x)):
@@ -376,7 +355,6 @@ def main():
         bikeStopDtn[minPos]+= 1
         distanceArr = []
 
-    #print(bikeStopDtn)
     # plt.scatter(bikeStopsY, bikeStopsX, color = 'red')
     # plt.show
 
@@ -401,7 +379,6 @@ def main():
     heatmap, xedges, yedges = np.histogram2d(x, y, bins=(1000, 1000), range=[[xMin, xMax], [yMin, yMax]])
     extent = [yedges[0], yedges[-1], xedges[0], xedges[-1]]
 
- #   print(bikeStopDtn)
     for i in range (0, len(bikeStopDtn)):
         bikeStopDtn[i] = math.sqrt(bikeStopDtn[i])
     plt.clf()
@@ -413,7 +390,6 @@ def main():
 
 def distance(x, y, refX, refY):
     value = math.sqrt((x - refX) ** 2 + (y - refY) ** 2)
-  #  print (value)
     return value
 
 
