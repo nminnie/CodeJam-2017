@@ -1,0 +1,37 @@
+body {
+    background-color: black;
+}
+button {
+    background-color: #cccccc;
+    color: darkslategrey;
+    font-size:100%;
+    font-weight: lighter;
+    margin: 2px;
+}
+button:hover {
+    background-color: whitesmoke;
+    color: darkslategrey;
+}
+button.active {
+    background-color: black;
+    border-color: white;
+    color: whitesmoke;
+}
+button.divider {
+    background-color: transparent;
+    border-color: transparent;
+    width:1px;
+    padding:0;
+    margin:0;
+
+}
+#map{
+    float: left;
+}
+h1{
+    color:white;
+    font-size: 150%;
+}
+hr{
+    border-color:white;
+}
