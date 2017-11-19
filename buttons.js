@@ -40,6 +40,5 @@ function changeMonth(evt, tabName){
 }
 
 function changeMap(time, day, month){
-    //document.getElementById("map").innerHTML = '<img class="photo" src="/photos/"' + time + '_' + day + '_' + month +'.png" width=100% >';
-    document.getElementById("map").innerHTML = '<img class="photo" src="myimage.png" width=100% float="left">';
+    document.getElementById("map").innerHTML = '<img class="photo" src="' + time + '_' + day + '_' + month +'.png" width=100% >';
 }
