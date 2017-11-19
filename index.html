@@ -7,43 +7,48 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Working Test</title>
+    <title>Hack these Bikes</title>
 </head>
 
 <body>
 
+
 <div class="container">
-    <br>
+    <br><br>
+    <div class="row">
+        <div>
+            <h2>BIKING IN THE NEW YORK CITI</h2>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-8">
-                <div id="map"></div>
+            <div id="map"></div>
         </div>
-        <div class="col-sm-4">
-            <div style="float:right">
-                <h1>TIME OF DAY</h1>
-                <div class="btn-group">
-                    <button id="ALLDAY" onclick="changeTime(event, 'ALLDAY')" type="button" class="btn btn-default btn-sm time">ALL DAY</button>
-                    <button type="button" class="button divider"></button>
-                    <button onclick="changeTime(event, 'night')" type="button" class="btn btn-default btn-sm time">12AM-8AM</button>
-                    <button onclick="changeTime(event, 'day')" type="button" class="btn btn-default btn-sm time">8AM-4PM</button>
-                    <button onclick="changeTime(event, 'eve')" type="button" class="btn btn-default btn-sm time">4PM-12AM</button>
-                </div>
-                <br><hr>
-                <h1>TIME OF WEEK</h1>
-                <div class="btn-group">
-                    <button id="ALLWK" onclick="changeDay(event, 'ALLWK')" type="button" class="btn btn-default btn-sm day">ALL WEEK</button>
-                    <button type="button" class="button divider"></button>
-                    <button onclick="changeDay(event, 'WKEND')" type="button" class="btn btn-default btn-sm day">WEEKEND</button>
-                    <button onclick="changeDay(event, 'WKDAY')" type="button" class="btn btn-default btn-sm day">WEEKDAY</button>
-                </div>
-                <br><hr>
-                <h1>TIME OF YEAR</h1>
-                <div class="btn-group">
-                    <button id="ALLYR" onclick="changeMonth(event, 'ALLYR')" type="button" class="btn btn-default btn-sm month">ALL YEAR</button>
-                    <button type="button" class="button divider"></button>
-                    <button onclick="changeMonth(event, 'WINTER')" type="button" class="btn btn-default btn-sm month">WINTER</button>
-                    <button onclick="changeMonth(event, 'SUMMER')" type="button" class="btn btn-default btn-sm month">SUMMER</button>
-                </div>
+        <div class="col-sm-4 ui">
+            <br>
+            <h1>TIME OF DAY</h1>
+            <div class="btn-group">
+                <button id="ALLDAY" onclick="changeTime(event, 'ALLDAY')" type="button" class="btn btn-default btn-sm time">ALL DAY</button>
+                <button type="button" class="button divider"></button>
+                <button onclick="changeTime(event, 'night')" type="button" class="btn btn-default btn-sm time">12AM-8AM</button>
+                <button onclick="changeTime(event, 'day')" type="button" class="btn btn-default btn-sm time">8AM-4PM</button>
+                <button onclick="changeTime(event, 'eve')" type="button" class="btn btn-default btn-sm time">4PM-12AM</button>
+            </div>
+            <br><hr>
+            <h1>TIME OF WEEK</h1>
+            <div class="btn-group">
+                <button id="ALLWK" onclick="changeDay(event, 'ALLWK')" type="button" class="btn btn-default btn-sm day">ALL WEEK</button>
+                <button type="button" class="button divider"></button>
+                <button onclick="changeDay(event, 'WKEND')" type="button" class="btn btn-default btn-sm day">WEEKEND</button>
+                <button onclick="changeDay(event, 'WKDAY')" type="button" class="btn btn-default btn-sm day">WEEKDAY</button>
+            </div>
+            <br><hr>
+            <h1>TIME OF YEAR</h1>
+            <div class="btn-group">
+                <button id="ALLYR" onclick="changeMonth(event, 'ALLYR')" type="button" class="btn btn-default btn-sm month">ALL YEAR</button>
+                <button type="button" class="button divider"></button>
+                <button onclick="changeMonth(event, 'WINTER')" type="button" class="btn btn-default btn-sm month">WINTER</button>
+                <button onclick="changeMonth(event, 'SUMMER')" type="button" class="btn btn-default btn-sm month">SUMMER</button>
             </div>
         </div>
     </div>
