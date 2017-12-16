@@ -5,4 +5,4 @@ Our project maps the Citi Bike stations of New York City and models the busyness
 
 Used HTML and Javascript for front-end user interaction to display the map and toggle buttons. We used Python for back-end to parse and analyze the given datasets.
 
-<img src="https://github.com/nminnie/CodeJam-2017/blob/master/pics/CitiBikes.PNG" align="left" height="560" width="1000" >
+<img src="https://github.com/nminnie/CodeJam-2017/blob/master/pics/CitiBikes.PNG" align="left" height="555" width="1000" >
