@@ -1,8 +1,9 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import csv
+import numpy as np   # for plotting
+import matplotlib.pyplot as plt   # for plotting
+import csv  # for parsing the data set
 import math
 
+# class represent a bike ride
 class Ride:
     time = -1  # 0=4:00 to 11:59, 1=12:00 to 18:59, 2=19:00 to 3:59
     day = -1  # 0=weekday, 1=weekend
@@ -13,13 +14,14 @@ class Ride:
     endLong = 0.0
 
 def main():
+    # specify the min & max longitudes and latitudes for the plot
     xMin = 40.67
     xMax = 40.78
     yMin = -74.04
     yMax = -73.93
-    # for January (winter)
+    # parse the data set for January (winter)
     rides = []
-    with open('2014-01 - Citi Bike trip data.csv') as f:
+    with open('2014-01 - Citi Bike trip data.csv') as f:   # get data from data set
         reader = csv.DictReader(f, delimiter=',')
         for row in reader:
             x = Ride()
@@ -28,20 +30,22 @@ def main():
             sDate, sTime = starttime.split(" ")
             sHour, sMin = sTime.split(":")
             sHour = int(sHour)
-            # 0 = morning, 1 = afternoon, 2 = night
-            if (4 <= sHour and sHour < 12):
+            # classify rides by time of the day
+            if (4 <= sHour and sHour < 12):       # 0 = morning
                 x.time = 0
-            elif (12 <= sHour and sHour < 19):
+            elif (12 <= sHour and sHour < 19):    # 1 = afternoon
                 x.time = 1
-            else:
-                x.time = 2
+            else:                                 # 2 = night
+                 x.time = 2
             sMonth, sDay, sYear = sDate.split("/")
             sDay = int(sDay)
-            # 0 = weekday, 1 = weekend
-            if (sDay % 7 == 4 or sDay % 7 == 5):
+            # classify rides by day of the week 
+            if (sDay % 7 == 4 or sDay % 7 == 5):   # 1 = weekend
                 x.day = 1
-            else:
+            else:                                  # 0 = weekday
                 x.day = 0
+            
+            # get the longitude and latitude of the starting and ending points of the rides
             startLat = row['start station latitude']
             startLat = float(startLat)
             x.startLat = startLat
@@ -54,9 +58,11 @@ def main():
             endLong = row['end station longitude']
             endLong = float(endLong)
             x.endLong = endLong
-            if (xMin <= x.startLat <= xMax and yMin <= x.startLong <= yMax):
+            # if the ride is within our map's range, add it to 'ride' list
+            if (xMin <= x.startLat <= xMax and yMin <= x.startLong <= yMax): 
                 rides.append(x)
-    # for July (summer)
+
+    # do the same to July data set (summer)
     with open('2014-07 - Citi Bike trip data.csv') as f:
         reader = csv.DictReader(f, delimiter=',')
         for row in reader:
@@ -94,7 +100,10 @@ def main():
             x.endLong = endLong
             if (xMin <= x.startLat <= xMax and yMin <= x.startLong <= yMax):
                 rides.append(x)
-    # all rides = #all year, all week, all day
+    
+    # declare lists for different times,  days, seasons
+    # these will be filled later
+    # all rides = #all year, all week, all day -- this is the 'rides' list
     allmorning = []  # all year, all week, morning
     allafternoon = []  # all year, all week, afternoon
     allnight = []  # all year, all week, night
@@ -130,6 +139,8 @@ def main():
     summer_Weekend_morning = []
     summer_Weekend_afternoon = []
     summer_Weekend_night = []
+    
+    # file the lists with the bike rides corresponding to their time, day, and season
     for i in range(0, len(rides)):
         x = rides[i]
         if (x.time == 0):
@@ -208,6 +219,8 @@ def main():
                     summer_Weekend_afternoon.append(x)
                 elif (x.time == 2):
                     summer_Weekend_night.append(x)
+    
+    #declare variables for plotting graph
     sum = 0
     stations = 80
     regionDensity = []
@@ -217,6 +230,7 @@ def main():
     xSize = 10
     ySize = 10
 
+    # dictionary to help create .png files with appropriate names
     dict = {'rides': "ALLDAY_ALLWK_ALLYR",
             'allmorning': "day_ALLWK_ALLYR",
             'allafternoon': "eve_ALLWK_ALLYR",
@@ -264,9 +278,11 @@ def main():
             }
 
     listMake = allmorning
-
+    
+    # create .png files 
     filename = dict['allmorning'] + ".png"
-
+    
+    # begin plotting
     x = []
     y = []
 
@@ -281,6 +297,7 @@ def main():
         for j in range(0, ySize):
             regionDensity.append(heatmap[i, j])
             sum += heatmap[i, j]
+    
     # Turn regionDensity into a proportion
     for i in range(0, xSize):
         for j in range(0, ySize):
